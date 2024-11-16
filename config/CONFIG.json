@@ -5,9 +5,10 @@
     "owner": "",
     "customStartMsg": "",
     "noChat": false, 
-    "needsPort": true, 
+    "needsPort": false, 
     "experimentalFeatures": false,
     "processquit": true,
     "consoleCounter": true,
-    "ogTitle": false
+    "ogTitle": false,
+    "autoLog": false
 }

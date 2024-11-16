@@ -429,6 +429,16 @@ class MCBot {
             this.logInfo(`<${sender}> ${message}`);
         });
 
+        if (config.autoLog = true) {
+            this.bot.on('health', () => {
+                if (this.bot.health < 6) {  
+                    this.logWarn(`AutoLog`);
+                    this.bot.quit();
+                    this.reconnect();
+                }
+            });
+        }
+        
         this.bot.on('whisper', async (username, message) => {
             if (botNames.includes(username)) return;
         
