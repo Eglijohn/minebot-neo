@@ -1,6 +1,6 @@
-// Minebot NEO 2.0 by Eglijohn
-// DO NOT EDIT!!!
+// Minebot NEO by Eglijohn
 // DC-Server: https://discord.gg/CKySgRzUYp
+// Have you read the Manual??
 
 
 import mineflayer from 'mineflayer';
@@ -16,13 +16,13 @@ import chalk from 'chalk';
 const { pathfinder, Movements, goals } = pkg;
 const ansiEscape = /\x1b\[[0-9;]*m/g;
 
+
 let botArgs = {};
 let botNames = [];
 let config = {};
 let owner;
-let version = "2.0.1a";
+let version = "2.2.1a";
 let count = 0;
-let egliGod = "."
 
 
 
@@ -56,28 +56,17 @@ async function readAccountFile() {
 }
 
 
-if (config.ogTitle = false) {
-    console.log(chalk.red('NOTE:') + chalk.gray(' The Bot is currently in Development. Please report Bugs to our Discord-Server:') + chalk.hex('#65b0db')(' https://discord.gg/CKySgRzUYp'));
-    console.log(chalk.bold.hex('#044cd9')("___  ____            _           _    ") + chalk.hex('#f5f5f5')(" _   _  _____ _____ "));
-    console.log(chalk.bold.hex('#0443bf')("|  \\/  (_)          | |         | |   ") + chalk.hex('#e1e1e3')("| \\ | ||  ___|  _  |"));
-    console.log(chalk.bold.hex('#033cab')("| .  . |_ _ __   ___| |__   ___ | |_  ") + chalk.hex('#b6b6b8')("|  \\| || |__ | | | |"));
-    console.log(chalk.bold.hex('#02369c')("| |\\/| | | '_ \\ / _ \\ '_ \\ / _ \\| __| ") + chalk.hex('#88898a')("| . ` ||  __|| | | |"));
-    console.log(chalk.bold.hex('#012e85')("| |  | | | | | |  __/ |_) | (_) | |_  ") + chalk.hex('#5a5b5c')("| |\\  || |___\\ \\_/ /"));
-    console.log(chalk.bold.hex('#022975')("\\_|  |_/_|_| |_|\\___|_.__/ \\___/ \\__|") + chalk.hex('#48494a')(" \\_| \\_/\\____/ \\___/ "));
-    console.log(chalk.hex('#011b4f')("By Eglijohn                                        ") + chalk.hex('#282929')(version));
-    console.log(chalk.gray("=========================================================="));
-    console.log(' ')
-} else {
-    console.log(chalk.red('NOTE:') + chalk.gray(' The Bot is currently in Development. Please report Bugs or Wishes to Eglijohn.'));
-    console.log(chalk.bold.blue("___  ____            _           _    ") + chalk.gray(" _   _  _____ _____ "));
-    console.log(chalk.bold.blue("|  \\/  (_)          | |         | |   ") + chalk.gray("| \\ | ||  ___|  _  |"));
-    console.log(chalk.bold.blue("| .  . |_ _ __   ___| |__   ___ | |_  ") + chalk.gray("|  \\| || |__ | | | |"));
-    console.log(chalk.bold.blue("| |\\/| | | '_ \\ / _ \\ '_ \\ / _ \\| __| ") + chalk.gray("| . ` ||  __|| | | |"));
-    console.log(chalk.bold.blue("| |  | | | | | |  __/ |_) | (_) | |_  ") + chalk.gray("| |\\  || |___\\ \\_/ /"));
-    console.log(chalk.bold.blue("\\_|  |_/_|_| |_|\\___|_.__/ \\___/ \\__|") + chalk.gray(" \\_| \\_/\\____/ \\___/ "));
-    console.log(chalk.cyan("By Eglijohn                                         ", version));
-    console.log(chalk.gray("=========================================================="));
-}
+
+console.log(chalk.red('NOTE:') + chalk.gray(' The Bot is currently in Development. Please report Bugs to our Discord-Server:') + chalk.hex('#65b0db')(' https://discord.gg/CKySgRzUYp'));
+console.log(chalk.bold.hex('#044cd9')("___  ____            _           _    ") + chalk.hex('#f5f5f5')(" _   _  _____ _____ "));
+console.log(chalk.bold.hex('#0443bf')("|  \\/  (_)          | |         | |   ") + chalk.hex('#e1e1e3')("| \\ | ||  ___|  _  |"));
+console.log(chalk.bold.hex('#033cab')("| .  . |_ _ __   ___| |__   ___ | |_  ") + chalk.hex('#b6b6b8')("|  \\| || |__ | | | |"));
+console.log(chalk.bold.hex('#02369c')("| |\\/| | | '_ \\ / _ \\ '_ \\ / _ \\| __| ") + chalk.hex('#88898a')("| . ` ||  __|| | | |"));
+console.log(chalk.bold.hex('#012e85')("| |  | | | | | |  __/ |_) | (_) | |_  ") + chalk.hex('#5a5b5c')("| |\\  || |___\\ \\_/ /"));
+console.log(chalk.bold.hex('#022975')("\\_|  |_/_|_| |_|\\___|_.__/ \\___/ \\__|") + chalk.hex('#48494a')(" \\_| \\_/\\____/ \\___/ "));
+console.log(chalk.hex('#011b4f')("By Eglijohn                                        ") + chalk.hex('#282929')(version));
+console.log(chalk.gray("=========================================================="));
+console.log(' ')
 
 
 class WebServer {
@@ -147,7 +136,7 @@ class MCBot {
 
 
         this.bot.once('spawn', () => {
-            if (config.experimentalFeatures == true) {
+            if (config.experimentalFeatures === true) {
                 mineflayerViewer(this.bot, { port: 4000 });
                 this.log(chalk.green("Prismarine viewer web server running on http://localhost:4000"));
 
@@ -191,17 +180,18 @@ class MCBot {
     }
 
 
+
     async executeCommand(command) {
         const [cmd, ...args] = command.split(' ');
 
         switch (cmd) {
             case 'help':
-                this.logInfo('Commands: !quit, !players, !info, !inventory, !follow <player>, !stopfollow');
+                this.logInfo(('Commands: '), chalk.hex('#cfa1f0')('!quit, !players, !info, !inventory, !follow <player>, !stopfollow'));
                 break;
 
             case 'players':
                 const playerList = Object.keys(this.bot.players).filter(player => player !== this.bot.username);
-                this.logInfo(playerList.length > 0 ? `Online players: ${playerList.join(', ')}` : 'No other players are online.');
+                this.logInfo(playerList.length > 0 ? `Online players: ${chalk.hex('#cfa1f0')(playerList.join)(', ')}` : 'No other players are online.');
                 break;
 
             case 'quit':
@@ -212,28 +202,30 @@ class MCBot {
             case 'info':
                     this.logInfo(`--Infos--`);
                     this.logInfo('Server:');
-                    this.logInfo(`    Host:           ${this.host}`);
-                    this.logInfo(`    Port:           ${this.port}`);
-                    this.logInfo(`    Time:            ${this.bot.time.timeOfDay}`);
+                    this.logInfo(`    Host:           ${chalk.hex('#cfa1f0')(this.host)}`);
+                    this.logInfo(`    Port:           ${chalk.hex('#cfa1f0')(this.port)}`);
+                    this.logInfo(`    Time:           ${chalk.hex('#cfa1f0')(this.bot.time.timeOfDay)}`);
                     this.logInfo(``);
                     this.logInfo('Bot:');
-                    this.logInfo(`    View Distance:  ${this.bot.settings.viewDistance}`);
-                    this.logInfo(`    Health:         ${Math.round(this.bot.health * 2) / 2}`);
-                    this.logInfo(`    XP:             ${this.bot.experience.points} Points `);
-                    this.logInfo(`    Food:           ${Math.round(this.bot.food * 2) / 2}`);
-                    this.logInfo(`    Oxygen:         ${Math.round(this.bot.oxygenLevel * 2) / 2}`);
-                    this.logInfo(`    Gamemode:       ${this.bot.game.gameMode}`);
-                    this.logInfo(`    Dimension:      ${this.bot.game.dimension}`);
-                    this.logInfo(`    Difficulty:     ${this.bot.game.difficulty}`);
-                    this.logInfo(`    Position:       ${this.bot.entity.position}`);
+                    this.logInfo(`    View Distance:  ${chalk.hex('#cfa1f0')(this.bot.settings.viewDistance)}`);
+                    this.logInfo(`    Health:         ${chalk.hex('#cfa1f0')(Math.round(this.bot.health * 2) / 2)}`);
+                    this.logInfo(`    XP:             ${chalk.hex('#cfa1f0')(this.bot.experience.points)}`, chalk.hex('#cfa1f0')('Points'));
+                    this.logInfo(`    Food:           ${chalk.hex('#cfa1f0')(Math.round(this.bot.food * 2)) / 2}`);
+                    this.logInfo(`    Oxygen:         ${chalk.hex('#cfa1f0')(Math.round(this.bot.oxygenLevel * 2) / 2)}`);
+                    this.logInfo(`    Gamemode:       ${chalk.hex('#cfa1f0')(this.bot.game.gameMode)}`);
+                    this.logInfo(`    Dimension:      ${chalk.hex('#cfa1f0')(this.bot.game.dimension)}`);
+                    this.logInfo(`    Difficulty:     ${chalk.hex('#cfa1f0')(this.bot.game.difficulty)}`);
+                    this.logInfo(`    Position:       ${(`X: ${chalk.hex('#de495b')(JSON.stringify(Math.round(this.bot.entity.position.x)), 
+                        chalk.white('Y:'), Math.round(this.bot.entity.position.y), 
+                        chalk.white('Z:'), Math.round(this.bot.entity.position.z))}`)}`);
                 break;
 
             case 'inventory':
                 const heldItem = this.bot.heldItem;
-                const inventoryItems = this.bot.inventory.items().map(item => `${item.displayName} (x${item.count})`);
+                const inventoryItems = this.bot.inventory.items().map(item => `${chalk.hex('#cfa1f0')(item.displayName)} (x${chalk.hex('#cfa1f0')(item.count)})`);
                 this.logInfo(`Inventory: ${inventoryItems.length > 0 ? inventoryItems.join(', ') : 'Inventory is empty'}`);
                 if (heldItem) {
-                    this.logInfo(`Held Item: ${heldItem.displayName} (x${heldItem.count})`);
+                    this.logInfo(`Held Item: ${chalk.hex('#cfa1f0')(heldItem.displayName)} (x${chalk.hex('#cfa1f0')(heldItem.count)})`);
                 } else {
                     this.logInfo('No item is currently held.');
                 }
@@ -241,7 +233,7 @@ class MCBot {
 
             case 'follow':
                 const targetPlayer = this.bot.players[args[0]]?.entity;
-                targetPlayer ? this.followPlayer(targetPlayer) : this.logWarn(`Player ${args[0]} not found or not visible.`);
+                targetPlayer ? this.followPlayer(targetPlayer) : this.logWarn(`Player ${chalk.hex('#cfa1f0')(args[0])} not found or not visible.`);
                 break;
 
             case 'stopfollow':
@@ -260,11 +252,13 @@ class MCBot {
                 break;
 
             case 'pos':
-                this.logInfo(`My current Position: ${this.bot.entity.position}`)
+                this.logInfo(`My current Position: ${(`X: ${chalk.hex('#de495b')(JSON.stringify(Math.round(this.bot.entity.position.x)), 
+                                                    chalk.white('Y:'), Math.round(this.bot.entity.position.y), 
+                                                    chalk.white('Z:'), Math.round(this.bot.entity.position.z))}`)}`)
                 break;
                 
             default:
-                this.logWarn(`Command '${cmd}' not found. Enter !help for a list of available commands.`);
+                this.logWarn(`Command '${chalk.hex('#cfa1f0')(cmd)}' not found. Enter !help for a list of available commands.`);
                 break;
         }
     }
@@ -280,7 +274,7 @@ class MCBot {
         this.bot.pathfinder.setMovements(movements);
         const goal = new goals.GoalFollow(target, 1);
         this.bot.pathfinder.setGoal(goal, true);
-        this.logInfo(`Now following ${target.username}`);
+        this.logInfo(`Now following ${hex('#cfa1f0')(target.username)}`);
     }
 
 
@@ -315,9 +309,9 @@ class MCBot {
             this.bot.pathfinder.setGoal(goal);
 
             if (username) {
-                this.logInfo(`I am going to (${x}, ${y}, ${z})`);
+                this.logInfo(`I am going to (${hex('#cfa1f0')(x)}, ${hex('#cfa1f0')(y)}, ${hex('#cfa1f0')(z)})`);
             } else {
-                this.logInfo(`I am going to (${x}, ${y}, ${z})`);
+                this.logInfo(`I am going to (${hex('#cfa1f0')(x)}, ${hex('#cfa1f0')(y)}, ${hex('#cfa1f0')(z)})`);
             }
         } else {
             this.logError(username ? `Invalid coordinates. Please provide numbers.` : `Invalid coordinates. Please provide numbers.`);
@@ -356,7 +350,7 @@ class MCBot {
     }
 
     logError(...msg) {
-        this.log(chalk.gray('[') + chalk.red('ERROR') + chalk.gray(']'), ...msg);
+        this.log(chalk.gray('[') + chalk.red('ERROR') + chalk.gray(']') + chalk.red(...msg ));
     }
 
     logInfo(...msg) {
@@ -364,18 +358,23 @@ class MCBot {
     }
 
     logWarn(...msg) {
-        this.log(chalk.gray('[') + chalk.yellow('WARN') + chalk.gray(']'), ...msg);
+        this.log(chalk.gray('[') + chalk.yellow('WARN') + chalk.gray(']') + chalk.yellow(...msg ));
+    }
+
+    logChat(...msg) {
+        this.log(chalk.gray('[') + chalk.green('CHAT') + chalk.gray('] ') + chalk.white(...msg ));
     }
 
 
 
     initEvents() {
         this.bot.on('login', async () => {
-            this.logInfo(`Logged in at ${this.host ? this.host : this.port} as ${this.bot.username}, version ${this.bot.version}`);
+            this.logInfo(chalk.green(`Logged in at ${chalk.yellow(this.host ? this.host : this.port)} as ${chalk.yellow(this.bot.username)}, version ${chalk.yellow(this.bot.version)}`));
+            this.logInfo(chalk.green(`chatLogMethod set to '${chalk.yellow(config.chatLogMethod)}'`))
         });
 
         this.bot.on('end', async (reason) => {
-            this.logWarn(`Connection lost: ${reason}`);
+            this.logWarn(`Connection lost: ${chalk.hex('#cfa1f0')(reason)}`);
             setTimeout(() => this.initBot(), 5000);
         });
 
@@ -388,12 +387,12 @@ class MCBot {
 
         this.bot.on('health', () => {
             if (this.bot.health < 20) {  
-                this.logWarn(`Health Update. Current health: ${Math.round(this.bot.health * 2) / 2}`);
+                this.logWarn(`Health Update. Current health: ${chalk.hex('#cfa1f0')(Math.round(this.bot.health * 2) / 2)}`);
             }
         });
 
         this.bot.on('entityDead', (entity) => {
-            this.logInfo(`Entity ${JSON.stringify(entity.name)} died`);
+            this.logInfo(`Entity ${chalk.hex('#cfa1f0')(JSON.stringify(entity.name))} died`);
         });
 
         this.bot.on('death', async () => {
@@ -401,34 +400,63 @@ class MCBot {
         });
 
         this.bot.on('respawn', async () => {
-            this.logWarn(`Respawned at ${this.bot.entity.position}`);
+            this.logWarn(`Respawned at ${chalk.hex('#cfa1f0')(this.bot.entity.position)}`);
         });
 
         this.bot.on('playerCollect', (collector, collected) => {
-            this.logInfo(`${JSON.stringify(collector.username)} picked up item(s) at ${JSON.stringify(collected.position)}`);
+            this.logInfo(`${chalk.hex('#b052f2')(JSON.stringify(collector.username))} picked up`,
+            chalk.hex('#cfa1f0')(JSON.stringify(collected.metadata[8]?.itemCount)), 
+            chalk.hex('#cfa1f0')(JSON.stringify(collected.displayName)),
+            "at ",
+            ('X:'), chalk.hex('#de495b')(JSON.stringify(Math.round(collected.position.x)), 
+            chalk.white('Y:'), Math.round(collected.position.y), 
+            chalk.white('Z:'), Math.round(collected.position.z)));
         });
 
         this.bot.on('itemDrop', (entity) => {
-            this.logInfo(`${JSON.stringify(entity.itemCount)} item(s) were dropped at ${JSON.stringify(entity.position)}`);
+            this.logInfo(chalk.hex('#cfa1f0')(JSON.stringify(entity.metadata[8]?.itemCount)), 
+            chalk.hex('#cfa1f0')(JSON.stringify(entity.displayName)), 
+            ('appeared at'),
+            ('X:'), chalk.hex('#de495b')(JSON.stringify(Math.round(entity.position.x)), 
+            chalk.white('Y:'), Math.round(entity.position.y), 
+            chalk.white('Z:'), Math.round(entity.position.z), 
+            chalk.white('Entity ID: '), chalk.hex('#cfa1f0')(JSON.stringify(entity.id))));
         });
 
-
         this.bot.on('kicked', (reason) => {
-            this.logWarn(`Kicked: ${JSON.stringify(reason.value)}`);
+            this.logWarn(`Kicked: ${JSON.stringify(reason.value.extra.value.value)}`);
         });
 
         this.bot.on('playerJoined', (player) => {
-            this.logJoin(`Player ${player.username} joined`);
+            this.logJoin(chalk.hex('#b052f2')(`${player.username}`));
         });
 
         this.bot.on('playerLeft', (player) => {
-            this.logLeave(`Player ${player.username} left`);
+            this.logLeave(chalk.hex('#b052f2')(`${player.username}`));
         });
 
-        this.bot.on('messagestr', (message, sender) => {
-            this.logInfo(`<${sender}> ${message}`);
-        });
+        if (config.chatLogMethod === 'normal') {
+            this.bot.on('chat', (username, message) => {
+                this.logChat(`<${chalk.hex('#b052f2')(username)}> ${message}`);
+            });
+        } else if (config.chatLogMethod === 'str') {
+            this.bot.on('messagestr', (message, sender) => {
+                this.logChat(`<${chalk.hex('#cfa1f0')(sender)}> ${message}`);
+            });
+        }  else {
+            this.logError(` chatLogMethod '${chalk.hex('#cfa1f0')(config.chatLogMethod)}' not found. Try 'normal' or 'str'.`)
+        }
 
+        if (config.autoLog === true) {
+            this.bot.on('health', () => {
+                if (this.bot.health < 6) {  
+                    this.logWarn(`AutoLog`);
+                    this.bot.quit();
+                    this.reconnect();
+                }
+            });
+        }
+        
         this.bot.on('whisper', async (username, message) => {
             if (botNames.includes(username)) return;
         
@@ -439,12 +467,6 @@ class MCBot {
             if (msg.startsWith("!help")) {
                 this.bot.chat(`/msg ${username} Minebot NEO ${version} by Eglijohn.`);
                 this.bot.chat(`/msg ${username} The owner of the bot is: ${config.owner}.`);
-                this.bot.chat(`/msg ${username} Commands: (Remove the '.', only executable for the Owner)`);
-                this.bot.chat(`/msg ${username} .!help to show this Text`);
-                this.bot.chat(`/msg ${username} .!follow to follow the player that executes the Command, !stopfollow stops following`);
-                this.bot.chat(`/msg ${username} .!say <message> the bot will say/execute the message in chat`);
-                this.bot.chat(`/msg ${username} .!quit to quit the Bot`);
-                this.bot.chat(`/msg ${username} .!players for a list of online players`);
 
             } else if (msg.startsWith("!follow")) {
                 if (username !== owner) {
@@ -475,7 +497,7 @@ class MCBot {
                     return;
                 }
                 this.bot.quit();
-    
+
             } else if (msg.startsWith("!say")) {
                 const sayMessage = msg.substring(5);
                 if (username !== owner) {
@@ -510,6 +532,9 @@ class MCBot {
                 } else {
                     this.bot.chat(`/msg ${username} Usage: !goto <x> <y> <z>`);
                 }
+
+            } else if (msg.startsWith("!basehunt")) {
+                this.bot.chat(`/msg ${username} Request failed: too lazy.`)
             }
         });
     }
@@ -517,9 +542,8 @@ class MCBot {
 
 
 
-if (config.experimentalFeatures == true) {
-    const myWebServer = new WebServer();
-    myWebServer.start();
+if (config.experimentalFeatures === true) {
+    new WebServer();
 } 
 
 

@@ -3,6 +3,12 @@ An easy-to-use Minecraft bot written in JavaScript using Mineflayer.
 
 **READ THE WHOLE MANUAL BEFORE STARTING THE BOT!**
 
+[Discord Server](https://discord.gg/CKySgRzUYp)  
+[Eglijohn's Discord Account](https://discord.com/users/1254464035546464321)  
+
+_**YOU ARE ALLOWED TO EDIT THE CODE WITH MY PERMISSION.**_  
+_**You are NOT allowed to share the code itself; only share the link.**_
+
 ### Dependencies:
 
 -   Node.js
@@ -23,6 +29,7 @@ An easy-to-use Minecraft bot written in JavaScript using Mineflayer.
     -   `experimentalFeatures:` Allows you to use in-development features. Use with caution.
     -   `processquit:` When set to false, the bot will rejoin after 5 seconds if you execute `!quit`.
     -   `consoleCounter:` Counts the logs in the terminal.
+    -   `autoLog:` Disconnects the bot when the health is under 3. Unstable.
 
 
 2.  Open `config/ACCOUNT.json`
@@ -64,22 +71,20 @@ An easy-to-use Minecraft bot written in JavaScript using Mineflayer.
     -   `!info` Displays information about the server and the bot.
     -   `!follow <player>` Makes the bot follow a player.
     -   `!stopfollow` Stops following.
+    -   `!pos` Displays the current position.
+    -   `!goto <x> <y> <z>` The bot goes to this position.
     -   To make the bot write/execute something in the Minecraft chat, simply enter the text without a '!' prefix.
 -   **Minecraft** 
 _To execute commands from the Minecraft chat, send the bot a direct message with the command._ _The bot cannot execute commands on servers with a different chat pattern, as it won’t recognize these as whispers._
-    
     -   `!help` Displays available commands.
     -   `!follow` Makes the bot follow YOU.
     -   `!stopfollow` Stops following.
     -   `!quit` Stops the bot.
     -   `!say <message>` The bot will write the specified message in chat. This can include commands.
     -   `!players` Lists online players.
+    -   `!goto <x> <y> <z>` The bot goes to this position.
+    -   `!pos` Displays the current position.
 
 ### Tokens
 - The Tokens get saved in Minecraft's AppData folder under `nmp-cache`.
 To log you off from the Bot, you just have to delete these tokens.
-
-[Discord Server](https://discord.gg/CKySgRzUYp)  
-[Eglijohn's Discord Account](https://discord.com/users/1254464035546464321)  
-_**YOU ARE ALLOWED TO EDIT THE CODE WITH MY PERMISSION.**_  
-_**You are NOT allowed to share the code itself; only share the link.**_
