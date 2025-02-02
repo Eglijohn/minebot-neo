@@ -1,0 +1,74 @@
+/*
++++++       +++++π+++++       
+++++++     ++++++π+++++++     
++++++++   +++++++   +++++     
++++++++   +++++++  ++++++     
+++++++++ ++++++++π+++++       
++++++++++++++++++   +++++     
+++++ +++++++ ++++   ++++++    
+++++  +++++  ++++π+++++++     
+++++  +++++  ++++π++++++      
+
+Minebot NEO by Eglijohn
+DC-Server: https://discord.gg/CKySgRzUYp
+Have you read the Manual???
+*/
+
+{ 
+    /* General */
+    "host": "",                         // Server 
+    "version": "",                      // Minecraft version
+    "port": 6969,                       // Port
+    "needsPort": false,                 // If the server needs a port
+    "owners": [""],                     // Owners       
+    
+    /* Chat */
+    "customStartMsg": "",               // Custom start message
+    "noChat": false,                    // If the bot should not Write anything in the chat
+
+    /* Loin/out */
+    "logWhenNoTotem": false,            // If the bot should log when no totem is in the inventory and he popped one
+    "autoLog": false,                   // If the bot should automatically log out when health is low
+    "autoLogHealth": 10,                // Auto log health (hearts x2)
+    "reconnectTimeout": 5000,           // Reconnect timeout
+
+    /* Pathfinder */
+    "canDig": false,                    // If the bot can dig
+    "canPlace": false,                  // If the bot can place blocks
+
+    /* AntiAFK */
+    "antiAFK": false,                   // If the bot should sneak to prevent AFK
+    "antiAFKInterval": 10000,           // AntiAFK interval
+    "sneakDuration": 1000,              // Sneak duration
+
+    /* Tp stuff */
+    "flyPacketInterval": 10,            // Interval to send fly packets (10 recommended)
+    "maceAttackHeight": 10,             // Height the bot drops itself for the mace attack. Max. 10
+    "maceAttackInterval": 500,          // Mace attack interval (500 recommended)
+
+    /* Chatbot */
+    "chatBot": false,                   // Chatbot
+    "command1": "",                     // Command 1
+    "response1": "",                    // Response 1
+    "command1trusted": true,            // If the command should only be executable for the owner
+
+    /* Console */
+    "consoleCounter": true,             // If the bot should show the log counter
+    "cliPrefix": "> ",                  // CLI prefix
+    "commandPrefix": "!",               // CLI Command prefix
+    "hideErrors": true,                 // If the bot should hide errors
+
+    /* Experiments */
+    "viewerPort": 5002,                 // Prismarine-Viewer port
+    "viewerPortFP": 5003,               // Prismarine-Viewer port for first person
+    "webServerPort": 5001,              // Web server port
+    "webInventoryPort": 5000,           // Web inventory viewer port
+    "showPathWalked": true,             // If the bot should show the path walked in the viewer
+
+    /* Stuff */
+    "customBramd": "Minebot NEO",       // Custom client brand
+
+    /* Look At Nearest Player */
+    "lookAtNearestPlayer": true,        // If the bot should look at the nearest player
+    "lookAtNearestPlayerInterval": 10   // Look at nearest player interval
+}

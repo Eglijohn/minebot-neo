@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A Minecraft Bot written in JS using Mineflayer.",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "lib": "lib"
   },
@@ -16,12 +17,18 @@
   "author": "Eglijohn",
   "license": "MIT",
   "dependencies": {
+    "axios": "^1.7.9",
     "chalk": "^5.3.0",
     "fs": "^0.0.1-security",
+    "gradient-string": "^3.0.0",
     "http": "^0.0.1-security",
+    "jsonc-parser": "^3.3.1",
     "minecraft-data": "^3.78.0",
     "mineflayer": "^4.23.0",
     "mineflayer-pathfinder": "^2.4.5",
-    "prismarine-viewer": "^1.28.0"
+    "ora": "^8.1.1",
+    "prismarine-viewer": "^1.28.0",
+    "protodef": "^1.17.0",
+    "punycode": "^2.3.1"
   }
 }
