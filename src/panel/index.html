@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logo.png">
+    <title>Minebot NEO Panel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+        body {
+            background-color: rgb(0, 0, 0);
+            position: relative;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .iframe {
+            border-radius: 1rem;
+            width: 100%;
+            height: 96vh;
+            border: #3f3f3f 1px solid;
+            position: relative;
+            z-index: 1;
+            background-color: rgb(10, 10, 10);
+        }
+
+        .iframefpm {
+            border-radius: 1rem;
+            width: 30vh;
+            height: 20vh;
+            border: #3f3f3f 1px solid;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            z-index: 2;
+            background-color: rgb(10, 10, 10);
+        }
+
+        .iframeinv {
+            transform: translateX(97%);
+            border-radius: 1rem;
+            width: 40vh;
+            height: 36vh;
+            border: #3f3f3f 1px solid;
+            position: absolute;
+            bottom: 34px;
+            right: 5px;
+            z-index: 1;
+            backdrop-filter: blur(30px);
+            background-color: rgba(0, 0, 0, 0.37);
+            transition: transform 0.5s ease;
+            position: fixed;
+        }
+
+        .iframeinv:hover {
+            transform: translateX(-2%);
+            border: #3f3f3f 1px solid;
+        }
+
+        .bot-data {
+            color: white;
+            border-radius: 1rem;
+            width: 40vh;
+            align-self: center;
+            padding-left: 1rem;
+            top: 1px;
+            z-index: 1;
+            position: absolute;
+            line-height: 6px;
+            margin: 5px;
+            text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+            border: #3f3f3f 1px solid;
+            backdrop-filter: blur(30px);
+            background-color: rgba(0, 0, 0, 0.37);
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            backdrop-filter: blur(30px);
+            background-color: rgba(0, 0, 0, 0.37);
+            border-radius: 1rem;
+            border: #3f3f3f 1px solid;
+            top: 21.5vh;
+            right: 5px;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-radius: 1rem;
+            line-height: 6px;
+            transition: transform 0.2s ease;
+        }
+
+        .dropdown-content:hover {
+            transform: translateX(7px);
+            cursor: pointer;
+        }
+
+        .spaced {
+            margin-bottom: 20px;
+        }
+
+        .players {
+            color: rgb(0, 162, 255);
+        }
+
+        .player-entry {
+            margin-bottom: 14px;
+            display: block;
+
+        }
+    </style>
+</head>
+
+<body>
+    <iframe class="iframe" src="http://localhost:5002/" title="3PM"></iframe>
+    <iframe class="iframefpm" src="http://localhost:5003/" title="1PM"></iframe>
+    <iframe class="iframeinv" src="http://localhost:5000/" title="1PM"></iframe>
+
+    <div id="bot-data" class="bot-data">
+        <p>Position: <span id="bot-position"></span></p>
+        <p>Health: <span id="bot-health"></span></p>
+        <p>Food: <span id="bot-food"></span></p>
+        <P class="spaced">XP: <span id="bot-xp"></span></P>
+        <p class="players"><span id="bot-nearby-players"></span></p>
+    </div>
+
+    <div id="dropdown" class="dropdown">
+        <div class="dropdown-content" id="dropdown-content"></div>
+        <div class="dropdown-content" id="move-bot">Walk</div>
+        <div class="dropdown-content" id="travel-bot">Travel</div>
+        <div class="dropdown-content" id="activate-block">Activate</div>
+        <div class="dropdown-content" id="teleport-bot">Teleport</div>
+    </div>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:8080');
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        });
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.type === 'blockClicked') {
+                const { x, y, z } = data.position;
+                const dropdown = document.getElementById('dropdown');
+                const dropdownContent = document.getElementById('dropdown-content');
+                dropdownContent.textContent = `${x}, ${y}, ${z}`;
+                dropdown.style.display = 'block';
+            } else {
+                document.getElementById('bot-position').textContent = `${Math.round(data.position.x)}, ${Math.round(data.position.y)}, ${Math.round(data.position.z)}`;
+                document.getElementById('bot-health').textContent = Math.round(data.health * 2) / 2;
+                document.getElementById('bot-food').textContent = Math.round(data.food);
+                document.getElementById('bot-xp').textContent = data.xp;
+                document.getElementById('bot-nearby-players').innerHTML = data.nearbyPlayers.map(player => `<span class="player-entry">${player.username} [${player.distance}m]</span>`).join('');
+            }
+        };
+
+        document.addEventListener('click', (event) => {
+            const dropdown = document.getElementById('dropdown');
+            if (!dropdown.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        document.getElementById('dropdown-content').addEventListener('click', () => {
+            const coordinates = document.getElementById('dropdown-content').textContent;
+            navigator.clipboard.writeText(coordinates).then(() => {
+                console.log('Coordinates copied to clipboard');
+            }).catch(err => {
+                console.error('Failed to copy coordinates: ', err);
+            });
+        });
+
+        document.getElementById('move-bot').addEventListener('click', () => {
+            const dropdownContent = document.getElementById('dropdown-content').textContent;
+            const [x, y, z] = dropdownContent.match(/-?\d+/g).map(Number);
+            const newY = y + 1;
+            ws.send(JSON.stringify({ type: 'moveBot', position: { x, y: newY, z } }));
+        
+            document.getElementById('dropdown').style.display = 'none';
+        });
+
+        document.getElementById('travel-bot').addEventListener('click', () => {
+            const dropdownContent = document.getElementById('dropdown-content').textContent;
+            const [x, y, z] = dropdownContent.match(/-?\d+/g).map(Number);
+            const newY = y + 1;
+            ws.send(JSON.stringify({ type: 'travelBot', position: { x, y: newY, z } }));
+            
+            document.getElementById('dropdown').style.display = 'none';
+        });
+
+        document.getElementById('activate-block').addEventListener('click', () => {
+            const dropdownContent = document.getElementById('dropdown-content').textContent;
+            const [x, y, z] = dropdownContent.match(/-?\d+/g).map(Number);
+            const newY = y + 1;
+            ws.send(JSON.stringify({ type: 'activateBlock', position: { x, y: newY, z } }));
+
+            document.getElementById('dropdown').style.display = 'none';
+        });
+
+        document.getElementById('teleport-bot').addEventListener('click', () => {
+            const dropdownContent = document.getElementById('dropdown-content').textContent;
+            const [x, y, z] = dropdownContent.match(/-?\d+/g).map(Number);
+            const newY = y + 1;
+            ws.send(JSON.stringify({ type: 'teleportBot', position: { x, y: newY, z } }));
+
+            document.getElementById('dropdown').style.display = 'none';
+            });
+    </script>
+</body>
+
+</html>

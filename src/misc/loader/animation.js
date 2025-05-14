@@ -1,5 +1,3 @@
-import { sand } from './spinners.js';
-
 export function LoadingAnimation(animation, length) {
     let frameIndex = 0;
     const totalFrames = animation.frames.length;
@@ -15,5 +13,3 @@ export function LoadingAnimation(animation, length) {
         console.log('\n');
     }, length);
 }
-
-LoadingAnimation(sand, 2000);

@@ -5,10 +5,12 @@
   "main": "index.js",
   "type": "module",
   "directories": {
-    "lib": "lib"
+    "src": "src"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --no-deprecation src/index.mjs",
+    "startexperiments": "node --no-deprecation src/index.mjs --experiments",
+    "startdebug": "node --no-deprecation src/index.mjs --debug --experiments"
   },
   "repository": {
     "type": "git",
@@ -17,18 +19,21 @@
   "author": "Eglijohn",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.7.9",
+    "axios": "^1.8.2",
+    "canvas": "^3.1.0",
     "chalk": "^5.3.0",
-    "fs": "^0.0.1-security",
-    "gradient-string": "^3.0.0",
+    "discord.js": "^14.18.0",
+    "esm": "^3.2.25",
+    "fs": "^0.0.2",
     "http": "^0.0.1-security",
     "jsonc-parser": "^3.3.1",
-    "minecraft-data": "^3.78.0",
-    "mineflayer": "^4.23.0",
+    "minecraft-data": "^3.84.1",
+    "mineflayer": "^4.26.0",
+    "mineflayer-armor-manager": "^2.0.1",
     "mineflayer-pathfinder": "^2.4.5",
-    "ora": "^8.1.1",
-    "prismarine-viewer": "^1.28.0",
+    "mineflayer-web-inventory": "^1.8.5",
+    "prismarine-viewer": "1.30.0",
     "protodef": "^1.17.0",
-    "punycode": "^2.3.1"
+    "ws": "^8.18.1"
   }
 }

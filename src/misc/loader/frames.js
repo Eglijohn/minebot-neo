@@ -38,3 +38,19 @@ export const sand = {
         "⢁"
     ]
 };
+
+export const dots = {
+    interval: 80,
+    frames: [
+        "⠋",
+        "⠙",
+        "⠹",
+        "⠸",
+        "⠼",
+        "⠴",
+        "⠦",
+        "⠧",
+        "⠇",
+        "⠏"
+    ]
+};
