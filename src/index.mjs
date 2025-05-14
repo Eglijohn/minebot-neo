@@ -84,13 +84,6 @@ class MCBot {
         this.initEvents();
 
         this.bot.once('spawn', () => {
-            /* chat patterns */
-            const chatRegex = new RegExp(config.chatRegex.slice(1, -1));
-            const whisperRegex = new RegExp(config.whisperRegex.slice(1, -1));
-            const additionalRegex = new RegExp(config.additionalRegex.slice(1, -1));
-            this.bot.addChatPattern('chat', chatRegex);
-            this.bot.addChatPattern('whisper', whisperRegex);
-            this.bot.addChatPattern('discord', additionalRegex);
 
             /* Experimental Features */
             if (process.argv.includes('--experiments')) {
