@@ -28,10 +28,6 @@
     "command1": "!test",                    // Command 1
     "response1": "Test Successful",         // Response 1
     "command1trusted": true,                // If the command should only be executable for the owners
-    "useChatPatterns": false,               // If the bot should use chat regex patterns (for simpcraft.com)
-    "chatRegex": "/^[a-zA-Z0-9_]+: .*/",    // Chat regex pattern
-    "whisperRegex": "/^\\[[a-zA-Z0-9_]+ -> [a-zA-Z0-9_]+\\] .*/", // Whisper regex pattern
-    "additionalRegex": "/^\\(D\\) [a-zA-Z0-9_]+: .*/", // Additional regex pattern
 
     /* Login/out Settings */
     "autoReconnect": true,                  // If the bot should automatically reconnect when leaving

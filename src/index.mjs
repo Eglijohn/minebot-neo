@@ -940,31 +940,6 @@ class MCBot {
             }
         });
 
-        if (config.useChatPatterns === false) {
-            this.bot.on('chat', (username, message) => {
-                let msg = message.toString();
-                logChat(`<${chalk.hex('#b052f2')(username)}> ${message}`);
-                if (msg.startsWith(`Is ${this.bot.username} online?`) && config.onlineCheck === true) {
-                    this.bot.chat('Yes, I am online.');
-                    this.bot.chat('How can I help you?');
-                }
-            });
-        } else {
-            /*
-            this.bot.on('chat:chat', (message) => {
-                logChat(message.toString());
-            });
-
-            this.bot.on('chat:whisper', (message) => {
-                logChat(message.toString());
-            });
-
-            this.bot.on('chat:discord', (message) => {
-                logChat(message.toString());
-            });
-            */
-        }
-
         this.bot.on('messagestr', (message, messagePosition, jsonMsg) => {
             logChat(jsonMsg.toAnsi());
             if (message.toString().startsWith(`Is ${this.bot.username} online?`) && config.onlineCheck === true) {
