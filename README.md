@@ -1,4 +1,4 @@
-# Minebot Private
+# Minebot NEO
 
 ### Dependencies:
 
