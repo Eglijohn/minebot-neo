@@ -1,4 +1,4 @@
-# Minebot NEO
+# Minebot NEO [WIP for rewritten version, this one is thrash]
 
 ### Dependencies:
 
